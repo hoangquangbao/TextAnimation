@@ -14,6 +14,7 @@
 		063B73B227A14578005C362E /* TextAnimationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063B73B127A14578005C362E /* TextAnimationTests.swift */; };
 		063B73BC27A14578005C362E /* TextAnimationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063B73BB27A14578005C362E /* TextAnimationUITests.swift */; };
 		063B73BE27A14578005C362E /* TextAnimationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063B73BD27A14578005C362E /* TextAnimationUITestsLaunchTests.swift */; };
+		063B73CC27A1478A005C362E /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063B73CB27A1478A005C362E /* Home.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		063B73B727A14578005C362E /* TextAnimationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextAnimationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		063B73BB27A14578005C362E /* TextAnimationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAnimationUITests.swift; sourceTree = "<group>"; };
 		063B73BD27A14578005C362E /* TextAnimationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAnimationUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		063B73CB27A1478A005C362E /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		063B739F27A14575005C362E /* TextAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				063B73CA27A14723005C362E /* View */,
 				063B73A027A14575005C362E /* TextAnimationApp.swift */,
 				063B73A227A14575005C362E /* ContentView.swift */,
 				063B73A427A14577005C362E /* Assets.xcassets */,
@@ -125,6 +128,14 @@
 				063B73BD27A14578005C362E /* TextAnimationUITestsLaunchTests.swift */,
 			);
 			path = TextAnimationUITests;
+			sourceTree = "<group>";
+		};
+		063B73CA27A14723005C362E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				063B73CB27A1478A005C362E /* Home.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				063B73A327A14575005C362E /* ContentView.swift in Sources */,
+				063B73CC27A1478A005C362E /* Home.swift in Sources */,
 				063B73A127A14575005C362E /* TextAnimationApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

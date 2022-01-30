@@ -60,6 +60,9 @@ struct Marquee: View {
     // Storing Text Size
     @State var storedSize: CGSize = .zero
     
+    // MARK: Animation Offset
+    @State var offset: CGFloat = 0
+    
     var body: some View{
         
         // Since it scroll horizontal using ScrollView
@@ -67,12 +70,19 @@ struct Marquee: View {
             
             Text(text)
                 .font(Font(font))
+                .offset(x: offset)
         }
         // Disabling Manual Scrolling
         .disabled(true)
         .onAppear {
             
             storedSize = textSize()
+            // Calculating Total Secs based on Text With
+            // Our Animation Speed for Each Character will be 0.02s
+            let timing: Double = (0.02 * storedSize.width)
+            withAnimation(.linear(duration: timing)){
+                offset = -storedSize.width
+            }
         }
     }
     

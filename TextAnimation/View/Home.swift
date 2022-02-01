@@ -27,7 +27,7 @@ struct Home: View {
                 }
                 .frame(height: 220)
                 
-                Marquee(text: "With the blazing-fast M1 Pro or M1 Max chip — the first Apple silicon designed for pros — you get groundbreaking performance and amazing battery life.", font: .systemFont(ofSize: 16, weight: .light))
+                Marquee(text: "With the blazing-fast M1 Pro", font: .systemFont(ofSize: 16, weight: .light))
                 
             }
             .padding(.horizontal)
@@ -53,7 +53,7 @@ extension View{
 // MARK: Marquee Text View
 struct Marquee: View {
     
-    var text: String
+    @State var text: String
     // Customimazation Options
     var font: UIFont
     
@@ -76,12 +76,26 @@ struct Marquee: View {
         .disabled(true)
         .onAppear {
             
+            // Base Text
+            let baseText = text
+            
+            // MARK: Continous Text Animation
+            // Adding Spacing For Continous Text
+            (1...15).forEach { _ in
+                text.append(" ")
+            }
+            text.append(baseText)
+            
             storedSize = textSize()
             // Calculating Total Secs based on Text With
             // Our Animation Speed for Each Character will be 0.02s
             let timing: Double = (0.02 * storedSize.width)
-            withAnimation(.linear(duration: timing)){
-                offset = -storedSize.width
+            
+            // Delaying First Animation
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                withAnimation(.linear(duration: timing)){
+                    offset = -storedSize.width
+                }
             }
         }
     }

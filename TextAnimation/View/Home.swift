@@ -27,7 +27,7 @@ struct Home: View {
                 }
                 .frame(height: 220)
                 
-                Marquee(text: "With the blazing-fast M1 Pro", font: .systemFont(ofSize: 16, weight: .light))
+                Marquee(text: "The most powerful MacBook Pro ever is here. With the blazing-fast M1 Pro or M1 Max chip — the first Apple silicon designed for pros", font: .systemFont(ofSize: 16, weight: .light))
                 
             }
             .padding(.horizontal)
@@ -84,9 +84,11 @@ struct Marquee: View {
             (1...15).forEach { _ in
                 text.append(" ")
             }
+            // Stoping Animation exactly before the next text
+            // "storedSize" được đặt trong hàm bất đồng bộ nên khi giá trị của nó được thay đổi thì hàm có chứa nó sẽ process ngay lập tức.
+            storedSize = textSize()
             text.append(baseText)
             
-            storedSize = textSize()
             // Calculating Total Secs based on Text With
             // Our Animation Speed for Each Character will be 0.02s
             let timing: Double = (0.02 * storedSize.width)
@@ -96,6 +98,16 @@ struct Marquee: View {
                 withAnimation(.linear(duration: timing)){
                     offset = -storedSize.width
                 }
+            }
+        }
+        // MARK: Repeating with the help of Timer
+        .onReceive(Timer.publish(every: ((0.02 * storedSize.width)), on: .main, in: .default).autoconnect()) { _ in
+            
+            // Resetting offset to 0
+            // Thus its look like its looping
+            offset = 0
+            withAnimation(.linear(duration: (0.02 * storedSize.width))){
+                offset = -storedSize.width
             }
         }
     }

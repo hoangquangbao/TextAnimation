@@ -101,7 +101,8 @@ struct Marquee: View {
             }
         }
         // MARK: Repeating with the help of Timer
-        .onReceive(Timer.publish(every: ((0.02 * storedSize.width)), on: .main, in: .default).autoconnect()) { _ in
+        // Optional: If you want some delay for next animation
+        .onReceive(Timer.publish(every: ((0.02 * storedSize.width) + 0.9), on: .main, in: .default).autoconnect()) { _ in
             
             // Resetting offset to 0
             // Thus its look like its looping

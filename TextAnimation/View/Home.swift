@@ -22,7 +22,7 @@ struct Home: View {
                     Image("TextAnimation")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-//                        .frame(width: size.width, height: size.height, alignment: .center)
+                        .frame(width: size.width, height: size.height, alignment: .center)
                         .cornerRadius(15)
                 }
                 .frame(height: 220)
@@ -63,6 +63,12 @@ struct Marquee: View {
     // MARK: Animation Offset
     @State var offset: CGFloat = 0
     
+    // MARK: Animation Speed
+    var animationSpeed: Double = 0.02
+    var delayTime: Double = 0.5
+    
+    @Environment(\.colorScheme) var scheme
+    
     var body: some View{
         
         // Since it scroll horizontal using ScrollView
@@ -71,7 +77,24 @@ struct Marquee: View {
             Text(text)
                 .font(Font(font))
                 .offset(x: offset)
+                .padding(.horizontal)
         }
+        // Opacity Effect
+        .overlay(content: {
+            
+            HStack{
+                let color : Color = scheme == .dark ? .black : .white
+                
+                LinearGradient(colors: [color, color.opacity(0.7),color.opacity(0.5),color.opacity(0.3)], startPoint: .leading, endPoint: .trailing)
+                    .frame(width: 20)
+                
+                Spacer()
+                
+                // Use ".revesed()" to setup for the end of line.
+                LinearGradient(colors: [color, color.opacity(0.7),color.opacity(0.5),color.opacity(0.3)].reversed(), startPoint: .leading, endPoint: .trailing)
+                    .frame(width: 20)
+            }
+        })
         // Disabling Manual Scrolling
         .disabled(true)
         .onAppear {
@@ -91,7 +114,7 @@ struct Marquee: View {
             
             // Calculating Total Secs based on Text With
             // Our Animation Speed for Each Character will be 0.02s
-            let timing: Double = (0.02 * storedSize.width)
+            let timing: Double = (animationSpeed * storedSize.width)
             
             // Delaying First Animation
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -102,12 +125,12 @@ struct Marquee: View {
         }
         // MARK: Repeating with the help of Timer
         // Optional: If you want some delay for next animation
-        .onReceive(Timer.publish(every: ((0.02 * storedSize.width) + 0.9), on: .main, in: .default).autoconnect()) { _ in
+        .onReceive(Timer.publish(every: ((animationSpeed * storedSize.width) + delayTime), on: .main, in: .default).autoconnect()) { _ in
             
             // Resetting offset to 0
             // Thus its look like its looping
             offset = 0
-            withAnimation(.linear(duration: (0.02 * storedSize.width))){
+            withAnimation(.linear(duration: (animationSpeed * storedSize.width))){
                 offset = -storedSize.width
             }
         }
